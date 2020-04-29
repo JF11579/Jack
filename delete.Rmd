@@ -1,0 +1,28 @@
+---
+title: "Data"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+getwd()
+```
+
+```{r}
+options(scipen = 999)
+```
+
+
+#PACKAGES
+
+
+#DATA:  https://docs.google.com/spreadsheets/d/12Acq8OckmWl0vkzUaOBuekAylBpcicVPtFhYTk8irOs/edit#gid=123817820
+
+
+```{r}
+data<- 
+```
+
