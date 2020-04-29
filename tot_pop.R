@@ -20,6 +20,8 @@ head(tot_pop)
 # Wrangle Data
 #data$year <- as.Date(as.character(data$year) , format = "%Y")
 
+
+
 tot_pop$year  <- as.Date(as.character(tot_pop$year) , "%Y")
 
 data$value <- as.numeric(data$value)
@@ -53,8 +55,25 @@ str(Fertility_rate)
 Fertility_rate$value <- as.numeric(Fertility_rate$value)
 str(Fertility_rate)
 
-############ TOTAL GDP  #########################
+Fertility_rate <- Fertility_rate %>%
+    filter(year >= as.Date("1978-04-28") & year<= as.Date("2017-04-28"))
 
+############ TOTAL GDP  #########################
+#Adjusted net national income (current US$)
+
+#First filter out the income rows
+Nat_Inc<- skinny_data %>%
+        filter(variable == 'Adjusted net national income (current US$)')
+
+Nat_Inc$year  <- as.Date(as.character(Nat_Inc$year) , "%Y")
+
+Nat_Inc$value <- as.numeric(Nat_Inc$value)
+
+Nat_Inc<- Nat_Inc %>%
+      filter(year >= as.Date("1970-04-28") & year<= as.Date("2017-04-28"))
+
+head(Nat_Inc,20)
+str(Nat_Inc)
 
 ##################################################
 #              GRAPHING                          #
@@ -76,4 +95,8 @@ L3<- ggplot(data= Fertility_rate , aes(x= year, y = value))+
   ggtitle("China's Fertility Rate 1978 -2017")
 L3
 
+L4<- ggplot(data= Nat_Inc, aes(x=year, y= value))  +
+  geom_line()+
+  ggtitle("China's Adjusted National Income 1970 - 2017")
+L4
 
