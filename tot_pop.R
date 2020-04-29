@@ -38,7 +38,22 @@ specific_years<- read_csv("specific_years.csv")
 str(specific_years)  
 
 ######### FERTILITY RATES  ################
-Fertility rate, total (births per woman)
+#Fertility rate, total (births per woman)
+#tot_pop<- skinny_data %>%
+#filter(variable == 'Population, total')
+
+Fertility_rate<- skinny_data %>%
+        filter(variable == 'Fertility rate, total (births per woman)')
+str(Fertility_rate)
+
+#tot_pop$year  <- as.Date(as.character(tot_pop$year) , "%Y")
+Fertility_rate$year <- as.Date(as.character(Fertility_rate$year) , '%Y')
+str(Fertility_rate)
+
+Fertility_rate$value <- as.numeric(Fertility_rate$value)
+str(Fertility_rate)
+
+############ TOTAL GDP  #########################
 
 
 ##################################################
@@ -56,9 +71,9 @@ L2<- ggplot(data= specific_years , aes(x= year, y = value))+
 L2
 
 
-L3<- ggplot(data= specific_years , aes(x= year, y = growth_rate))+
+L3<- ggplot(data= Fertility_rate , aes(x= year, y = value))+
   geom_line()+
-  ggtitle("China's Growth Rate 1978 -2017")
+  ggtitle("China's Fertility Rate 1978 -2017")
 L3
 
 
