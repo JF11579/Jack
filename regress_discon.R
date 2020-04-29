@@ -6,6 +6,7 @@ options(scipen = 999)
 library(tidyverse)
 library(ggplot2)
 library(lubridate)
+library(ggpubr)
 
 '''
 simple version discontinuou regression.
@@ -35,14 +36,18 @@ After_1978
 ###################  Graphing ##########################
 Before<- ggplot(data = Before_1978, aes(x=year, y= value)) +
   geom_line()+
+  ylim(0 , 7000)+
   ggtitle("Pre 1978 Per Capita Income")
 Before
 
 
 After<- ggplot(data = After_1978, aes(x=year, y= value)) +
   geom_line()+
+  ylim(0 , 7000)+
   ggtitle("Post 1978 Per Capita Income")
 After
 
+ggarrange(Before , After  , 
+        ncol = 2)
 
 
