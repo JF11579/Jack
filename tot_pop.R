@@ -1,0 +1,64 @@
+
+
+#
+options(scipen = 999)
+
+#PACKAGES
+library(tidyverse)
+library(ggplot2)
+library(lubridate)
+
+
+data<- read_csv("skinny_data.csv")
+head(data,3)
+
+tot_pop<- skinny_data %>%
+  filter(variable == 'Population, total')
+
+head(tot_pop)
+
+# Wrangle Data
+#data$year <- as.Date(as.character(data$year) , format = "%Y")
+
+tot_pop$year  <- as.Date(as.character(tot_pop$year) , "%Y")
+
+data$value <- as.numeric(data$value)
+tot_pop$value <- as.numeric(tot_pop$value)
+str(tot_pop)
+
+specific_years<- tot_pop %>%
+        filter(year >= as.Date("1978-04-28") & year<= as.Date("2017-04-28"))
+View(specific_years)
+
+#easier to add teh growth rate in a spreadsheet
+write_csv(specific_years, "specific_years.csv")
+
+# re-import the spreadheet now that growth rate is added
+specific_years<- read_csv("specific_years.csv")
+str(specific_years)  
+
+######### FERTILITY RATES  ################
+Fertility rate, total (births per woman)
+
+
+##################################################
+#              GRAPHING                          #
+##################################################
+
+L1<- ggplot(data= tot_pop , aes(x= year, y = value))+
+  geom_line()+
+  ggtitle("China's Population Growth 1960 -2020")
+L1
+
+L2<- ggplot(data= specific_years , aes(x= year, y = value))+
+  geom_line()+
+  ggtitle("China's Population Growth 1978 -2017")
+L2
+
+
+L3<- ggplot(data= specific_years , aes(x= year, y = growth_rate))+
+  geom_line()+
+  ggtitle("China's Growth Rate 1978 -2017")
+L3
+
+
