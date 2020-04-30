@@ -40,6 +40,13 @@ Before<- ggplot(data = Before_1978, aes(x=year, y= value)) +
   ggtitle("Pre 1978 Per Capita Income")
 Before
 
+Before_2<- ggplot(data = Before_1978, aes(x=year, y= value)) +
+  geom_line()+
+  ylim(0 , 7000)+
+  stat_regline_equation(label.x = 3, label.y = 1000)+
+  ggtitle("Pre 1978 Per Capita Income")
+Before_2
+
 
 After<- ggplot(data = After_1978, aes(x=year, y= value)) +
   geom_line()+
@@ -47,7 +54,17 @@ After<- ggplot(data = After_1978, aes(x=year, y= value)) +
   ggtitle("Post 1978 Per Capita Income")
 After
 
+After_2<- ggplot(data = After_1978, aes(x=year, y= value)) +
+  geom_line()+
+  ylim(0 , 7000)+
+  stat_regline_equation(label.x = 5000, label.y = 1000)+
+  ggtitle("Post 1978 Per Capita Income")
+After_2
+
 ggarrange(Before , After  , 
         ncol = 2)
+
+ggarrange(Before_2 , After_2  , 
+          ncol = 2)
 
 

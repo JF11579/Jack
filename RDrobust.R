@@ -1,10 +1,21 @@
 #https://rdrr.io/cran/rdrobust/man/rdplot.html
 
-
+help(rdsampsi)
 
 
 library(rdrobust)
 library(Hmisc)
+
+
+x<-runif(1000,-1,1)
+y<-5+3*x+2*(x>=0)+rnorm(1000)
+rdplot(y,x)
+
+
+
+X1<- Nat_Inc_3$A
+y1<-5+3*x+2*(x>= 0.17391304)+rnorm(1000)
+rdplot(y1,X1)
 
 
 x<-runif(1000,-1,1)  #generate a column (aka a VECTOR) of numbers btwn -1 and 1
@@ -16,6 +27,12 @@ head(x)
 describe(x)
 head(y)
 describe(y)
+
+
+#1978-04-29	127722875535	9	0.17391304
+x<- Nat_Inc_3$A
+y<- 5+3*x+2*(x>= 0.17391304)
+rdplot(y,x) 
 
 
   #################
@@ -67,13 +84,19 @@ A<-range01(t)
 A
 str(A)
 
-B<- cbind(Nat_Inc_3,A)
-View(B)
-      
+Nat_Inc_3<- cbind(Nat_Inc_3,A)
+View(Nat_Inc_3)
 
 
+#######################3      
+x<-runif(1000,-1,1)
+y<-5+3*x+2*(x>=0)+rnorm(1000)
+rdrobust(y,x)
+plot(x,y)
 
-
+x
+y
+#######################
 x <- runif(20, -10, 10)  # 20 numbers ranging from -10 to 10
 x
 rescale <- function(x) (x-min(x))/(max(x) - min(x)) * 100
