@@ -109,10 +109,16 @@ Inc_Growth_2<- ggplot(national_income , aes(x= year_number, y = value))+
 Inc_Growth_2
 
 Inc_Growth_3<- ggplot(national_income , aes(x= year_number, y = national_income$Growth_rate_pct))+
-  geom_col()+
+  geom_col(fill="red")+
   ggtitle("China's National Income Growth Rate Pct")+
   geom_vline(xintercept = 1978, linetype="dotted", 
-             color = "red", size=1.5)
+             color = "black", size=1.5) +
+  xlim(1970 , 2018) +
+annotate("text", x = 1980, y = 22, label = "1979") +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5))
+  
 Inc_Growth_3
 
 
@@ -121,7 +127,8 @@ grid.arrange( Growth_Rate_2 ,Population_2 , ncol=2)
 
 grid.arrange(Growth_Rate_1 , Population_2 ,Inc_Growth_1 , Inc_Growth_3, ncol=2)
 
-###############################################################################
-###########              Linear Regressions                    ################
-###############################################################################
++
+  xlim(1970 , 2018)+
+  annotate("text", x= 1980, y = 20,label= "1979)
+ 
 
