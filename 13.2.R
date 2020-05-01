@@ -37,45 +37,112 @@ mlda_subset %>%
   summary()
 
 ###############
-
+data<- read_csv("Nat_Inc_2.csv")
+is.data.frame(data)
+str(data)
 ##################
 
 
 
-value<- select(data_subset,value)
-str(value)
-observations<- select(data_subset, observation)
+'''
+data %>%
+    mutate(D = ifelse(scale_yr >=0,1,0)) %>%
+    lm(formula = value ~ D*I(scale_yr - 0)) %>%
+    summary()
+'''
+#################
+##################
+data %>%
+  mutate(D = ifelse(number_year >= 1978 , 1, 0)) %>%
+  lm(formula = value ~ D*I(number_year - 0)) %>%
+  summary()
+#################
+###################
+'''
+mlda %>% 
+  select(agecell, mva) %>% 
+  mutate(D = as.factor(ifelse(agecell >= 21, 1, 0))) %>% 
+  ggplot(aes(x = agecell, y = mva)) +
+  geom_point(aes(color = D)) + 
+  geom_smooth(method = "lm")
+'''
+mlda %>% 
+  select(agecell, mva) %>% 
+  mutate(D = as.factor(ifelse(agecell >= 21, 1, 0))) %>% 
+  ggplot(aes(x = agecell, y = mva)) +
+  geom_point(aes(color = D)) + 
+  geom_smooth(method = "lm")
 
-X<- data.frame(value, observations)
-head(X)
-str(X)
-
-
-data_subset<-select(data,value, observation)
-head(data_subset)
-str(data_subset)
-
-a<- c(10,20,30, 40, 50,60,70,80,90,100)
-b<- c(5,10,15,20,25,30,35,40,45,50)
-df<- data.frame(a,b)
-df
-str(df)
-
-df %>%
-  mutate(D = ifelse(a >= 20,1, 0))  %>%
-  lm(FORMULA = b ~ D*I(a - 30)) %>%
+'''
+data %>%
+  mutate(D = ifelse(number_year >= 1978 , 1, 0)) %>%
+  lm(formula = value ~ D*I(number_year - 0)) %>%
+  summary()
+'''
+write_csv(data, "data.csv")
+# simple regression
+data %>%
+  mutate(D = ifelse(number_year >= 1978 , 1, 0)) %>%
+  lm(formula = value ~ D*I(number_year - 0)) %>%
   summary()
 
-data<- read_csv("Nat_Inc_2.csv")
-is.data.frame(data)
-str(data)
-
+'''
 data %>%
-    mutate(D = ifelse(observation >= 9,1, 0))  %>%
-    lm(formula = value ~ D*I(observation - 9)) %>%
-    summary()
+    select(number_year, value) %>%
+  mutate(D = as.factor(ifelse(number_year >= 1978, 1 , 0)) %>% 
+  ggplot(aes(x = number_year, y = value)) +
+  geom_point(aes(color = D)) + 
+  geom_smooth(method = "lm")
+'''
 
 
+
+#############  GRAPH OUTPUT  ###################
+#https://stackoverflow.com/questions/28029922/linear-regression-and-storing-results-in-data-frame
+#Stack how to plot regression output
+
+
+
+
+
+########
+
+
+  data %>%
+    select(number_year, value) %>%
+    mutate(D = as.factor(ifelse(number_year >= 1978, 1 , 0)) %>%
+             ggplot(aes(x = number_year, y = value)) +
+             geom_line(aes(color = D)) + 
+             geom_smooth(method = "lm")
+
+
+
+
+
+
+
+
+
+
+
+
+
+#data %>%
+  mutate(D = ifelse(observation >= 9,1, 0))  %>%
+  lm(formula = value ~ D*I(observation - 9)) %>%
+  summary()
+
+#data %>%
+  mutate(D = ifelse(observation >= 9,1, 0))  %>%
+  lm(formula = value ~ D*I(observation - 9)) %>%
+  summary()
+
+'''
+mlda %>% 
+  mutate(D = ifelse(agecell >= 21, 1, 0)) %$% 
+  lm(mva ~ D * I(agecell - 21)) %>% 
+  summary()
+'''
 ###### Plot  13.4.2
 
 #library(rddtools)

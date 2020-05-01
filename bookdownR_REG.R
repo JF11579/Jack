@@ -1,6 +1,10 @@
 
 #https://bookdown.org/carillitony/bailey/chp11.html
 
+getwd()
+
+#OPTIONS
+#options(scipen =  999)
 
 #PACKAGES
 
@@ -19,6 +23,8 @@ library(rddtools)
 
 data("mlda", package = "masteringmetrics")
 head(mlda)
+View(mlda)
+write_csv(mlda, "mlda.csv")
 #load("Data/mlda.rda")
 
 mlda %>% 
